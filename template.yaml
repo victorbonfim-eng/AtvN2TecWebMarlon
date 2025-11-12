@@ -1,0 +1,157 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Sistema de Tickets de Troca de Aparelhos na Garantia - Arquitetura Serverless
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 256
+    Runtime: python3.11
+    Environment:
+      Variables:
+        DYNAMODB_TABLE: !Ref TicketsTable
+
+Parameters:
+  Environment:
+    Type: String
+    Default: dev
+    Description: Ambiente de execução (dev, staging, prod)
+
+Resources:
+  # API Gateway
+  TicketsApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: tickets-api
+      StageName: !Ref Environment
+      Cors:
+        AllowMethods: "'GET,POST,OPTIONS'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+        AllowOrigin: "'*'"
+      DefinitionBody:
+        swagger: '2.0'
+        info:
+          title: Tickets API
+          version: '1.0'
+        paths:
+          /tickets:
+            post:
+              x-amazon-apigateway-integration:
+                type: aws_proxy
+                httpMethod: POST
+                uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${AbreTicketFunction.Arn}/invocations
+              responses:
+                '201':
+                  description: Ticket criado com sucesso
+                '400':
+                  description: Erro de validação
+                '500':
+                  description: Erro interno
+
+  # Lambda ABRE_TICKET
+  AbreTicketFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${Environment}-abre-ticket
+      CodeUri: lambda_abre_ticket/
+      Handler: lambda_function.lambda_handler
+      Policies:
+        - SQSSendMessagePolicy:
+            QueueName: !GetAtt TicketsQueue.QueueName
+      Environment:
+        Variables:
+          QUEUE_URL: !Ref TicketsQueue
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            RestApiId: !Ref TicketsApi
+            Path: /tickets
+            Method: post
+
+  # Lambda PROCESSAMENTO_TICKET
+  ProcessamentoTicketFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${Environment}-processamento-ticket
+      CodeUri: lambda_processamento_ticket/
+      Handler: lambda_function.lambda_handler
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref TicketsTable
+        - SNSPublishMessagePolicy:
+            TopicName: !GetAtt NotificacaoTopic.TopicName
+      Environment:
+        Variables:
+          SNS_TOPIC_ARN: !Ref NotificacaoTopic
+      Events:
+        SQSEvent:
+          Type: SQS
+          Properties:
+            Queue: !GetAtt TicketsQueue.Arn
+            BatchSize: 10
+
+  # SQS Queue - TICKETS_PENDENTES
+  TicketsQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: !Sub ${Environment}-tickets-pendentes
+      VisibilityTimeout: 60
+      MessageRetentionPeriod: 1209600  # 14 dias
+      ReceiveMessageWaitTimeSeconds: 20  # Long polling
+
+  # DynamoDB Table
+  TicketsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub ${Environment}-tickets
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: ticket_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: ticket_id
+          KeyType: HASH
+      StreamSpecification:
+        StreamViewType: NEW_AND_OLD_IMAGES
+
+  # SNS Topic - NOTIFICA_USER
+  NotificacaoTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: !Sub ${Environment}-notificacao-user
+      DisplayName: Notificações de Tickets
+
+  # SNS Subscription (Email) - Opcional para testes
+  NotificacaoSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      TopicArn: !Ref NotificacaoTopic
+      Protocol: email
+      Endpoint: admin@example.com  # Substitua pelo email desejado
+
+Outputs:
+  ApiUrl:
+    Description: URL da API Gateway
+    Value: !Sub https://${TicketsApi}.execute-api.${AWS::Region}.amazonaws.com/${Environment}/tickets
+    Export:
+      Name: !Sub ${AWS::StackName}-ApiUrl
+
+  TicketsQueueUrl:
+    Description: URL da fila SQS
+    Value: !Ref TicketsQueue
+    Export:
+      Name: !Sub ${AWS::StackName}-QueueUrl
+
+  TicketsTableName:
+    Description: Nome da tabela DynamoDB
+    Value: !Ref TicketsTable
+    Export:
+      Name: !Sub ${AWS::StackName}-TableName
+
+  NotificacaoTopicArn:
+    Description: ARN do tópico SNS
+    Value: !Ref NotificacaoTopic
+    Export:
+      Name: !Sub ${AWS::StackName}-TopicArn
+

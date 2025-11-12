@@ -1,0 +1,30 @@
+{
+  "Records": [
+    {
+      "messageId": "test-message-id-1",
+      "receiptHandle": "test-receipt-handle",
+      "body": "{\"ticket_id\":\"550e8400-e29b-41d4-a716-446655440000\",\"status\":\"PENDENTE\",\"data_abertura\":\"2024-01-15T10:30:00.000Z\",\"nome_completo\":\"João Silva Santos\",\"cpf\":\"123.456.789-00\",\"email\":\"joao.silva@email.com\",\"telefone\":\"(11) 98765-4321\",\"endereco\":{\"rua\":\"Rua das Flores\",\"numero\":\"123\",\"complemento\":\"Apto 45\",\"bairro\":\"Centro\",\"cidade\":\"São Paulo\",\"estado\":\"SP\",\"cep\":\"01234-567\"},\"aparelho\":{\"marca\":\"Samsung\",\"modelo\":\"Galaxy S21\",\"numero_serie\":\"SN123456789012\",\"data_compra\":\"2023-11-20T00:00:00.000Z\",\"nota_fiscal\":\"NF-2023-001234\",\"defeito_relatado\":\"Tela com manchas e não liga mais\"},\"observacoes\":\"Aparelho parou de funcionar após 2 meses de uso normal.\",\"created_at\":\"2024-01-15T10:30:00.000Z\"}",
+      "attributes": {
+        "ApproximateReceiveCount": "1",
+        "SentTimestamp": "1609459200000",
+        "SenderId": "AIDAIOSFODNN7EXAMPLE",
+        "ApproximateFirstReceiveTimestamp": "1609459200000"
+      },
+      "messageAttributes": {
+        "ticket_id": {
+          "stringValue": "550e8400-e29b-41d4-a716-446655440000",
+          "dataType": "String"
+        },
+        "status": {
+          "stringValue": "PENDENTE",
+          "dataType": "String"
+        }
+      },
+      "md5OfBody": "test-md5",
+      "eventSource": "aws:sqs",
+      "eventSourceARN": "arn:aws:sqs:us-east-1:123456789012:test-queue",
+      "awsRegion": "us-east-1"
+    }
+  ]
+}
+

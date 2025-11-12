@@ -1,0 +1,167 @@
+{
+  "tickets": [
+    {
+      "ticket_id": "550e8400-e29b-41d4-a716-446655440000",
+      "status": "ACEITO",
+      "data_abertura": "2024-01-15T10:30:00.000Z",
+      "data_processamento": "2024-01-15T10:32:15.000Z",
+      "nome_completo": "João Silva Santos",
+      "cpf": "123.456.789-00",
+      "email": "joao.silva@email.com",
+      "telefone": "(11) 98765-4321",
+      "endereco": {
+        "rua": "Rua das Flores",
+        "numero": "123",
+        "complemento": "Apto 45",
+        "bairro": "Centro",
+        "cidade": "São Paulo",
+        "estado": "SP",
+        "cep": "01234-567"
+      },
+      "aparelho": {
+        "marca": "Samsung",
+        "modelo": "Galaxy S21",
+        "numero_serie": "SN123456789012",
+        "data_compra": "2023-11-20T00:00:00.000Z",
+        "nota_fiscal": "NF-2023-001234",
+        "defeito_relatado": "Tela com manchas e não liga mais"
+      },
+      "observacoes": "Aparelho parou de funcionar após 2 meses de uso normal.",
+      "motivo_processamento": "Ticket aprovado. Aparelho elegível para troca na garantia.",
+      "created_at": "2024-01-15T10:30:00.000Z",
+      "updated_at": "2024-01-15T10:32:15.000Z"
+    },
+    {
+      "ticket_id": "660e8400-e29b-41d4-a716-446655440001",
+      "status": "REJEITADO",
+      "data_abertura": "2024-01-16T14:20:00.000Z",
+      "data_processamento": "2024-01-16T14:22:30.000Z",
+      "nome_completo": "Maria Oliveira Costa",
+      "cpf": "987.654.321-00",
+      "email": "maria.oliveira@email.com",
+      "telefone": "(21) 99876-5432",
+      "endereco": {
+        "rua": "Avenida Atlântica",
+        "numero": "456",
+        "complemento": "",
+        "bairro": "Copacabana",
+        "cidade": "Rio de Janeiro",
+        "estado": "RJ",
+        "cep": "22021-000"
+      },
+      "aparelho": {
+        "marca": "Apple",
+        "modelo": "iPhone 12",
+        "numero_serie": "SN987654321098",
+        "data_compra": "2022-06-10T00:00:00.000Z",
+        "nota_fiscal": "NF-2022-005678",
+        "defeito_relatado": "Bateria não segura carga"
+      },
+      "observacoes": "Aparelho com mais de 1 ano de uso.",
+      "motivo_processamento": "Aparelho fora da garantia. Comprado há 19.2 meses.",
+      "created_at": "2024-01-16T14:20:00.000Z",
+      "updated_at": "2024-01-16T14:22:30.000Z"
+    },
+    {
+      "ticket_id": "770e8400-e29b-41d4-a716-446655440002",
+      "status": "ACEITO",
+      "data_abertura": "2024-01-17T09:15:00.000Z",
+      "data_processamento": "2024-01-17T09:17:45.000Z",
+      "nome_completo": "Carlos Eduardo Pereira",
+      "cpf": "456.789.123-00",
+      "email": "carlos.pereira@email.com",
+      "telefone": "(31) 91234-5678",
+      "endereco": {
+        "rua": "Rua da Bahia",
+        "numero": "789",
+        "complemento": "Sala 101",
+        "bairro": "Centro",
+        "cidade": "Belo Horizonte",
+        "estado": "MG",
+        "cep": "30160-012"
+      },
+      "aparelho": {
+        "marca": "Xiaomi",
+        "modelo": "Redmi Note 11",
+        "numero_serie": "XN456789012345",
+        "data_compra": "2023-10-05T00:00:00.000Z",
+        "nota_fiscal": "NF-2023-009876",
+        "defeito_relatado": "Botão de volume não funciona"
+      },
+      "observacoes": "Defeito apareceu após atualização do sistema.",
+      "motivo_processamento": "Ticket aprovado. Aparelho elegível para troca na garantia.",
+      "created_at": "2024-01-17T09:15:00.000Z",
+      "updated_at": "2024-01-17T09:17:45.000Z"
+    },
+    {
+      "ticket_id": "880e8400-e29b-41d4-a716-446655440003",
+      "status": "REJEITADO",
+      "data_abertura": "2024-01-18T16:45:00.000Z",
+      "data_processamento": "2024-01-18T16:47:20.000Z",
+      "nome_completo": "Ana Paula Ferreira",
+      "cpf": "789.123.456-00",
+      "email": "ana.ferreira@email.com",
+      "telefone": "(41) 92345-6789",
+      "endereco": {
+        "rua": "Rua XV de Novembro",
+        "numero": "321",
+        "complemento": "",
+        "bairro": "Centro",
+        "cidade": "Curitiba",
+        "estado": "PR",
+        "cep": "80020-310"
+      },
+      "aparelho": {
+        "marca": "Motorola",
+        "modelo": "Moto G52",
+        "numero_serie": "",
+        "data_compra": "2023-12-01T00:00:00.000Z",
+        "nota_fiscal": "NF-2023-012345",
+        "defeito_relatado": "Tela trincada"
+      },
+      "observacoes": "Não consegui encontrar o número de série.",
+      "motivo_processamento": "Número de série inválido ou não informado.",
+      "created_at": "2024-01-18T16:45:00.000Z",
+      "updated_at": "2024-01-18T16:47:20.000Z"
+    },
+    {
+      "ticket_id": "990e8400-e29b-41d4-a716-446655440004",
+      "status": "PENDENTE",
+      "data_abertura": "2024-01-19T11:30:00.000Z",
+      "data_processamento": null,
+      "nome_completo": "Roberto Alves Souza",
+      "cpf": "321.654.987-00",
+      "email": "roberto.souza@email.com",
+      "telefone": "(85) 93456-7890",
+      "endereco": {
+        "rua": "Avenida Beira Mar",
+        "numero": "654",
+        "complemento": "Casa",
+        "bairro": "Meireles",
+        "cidade": "Fortaleza",
+        "estado": "CE",
+        "cep": "60165-121"
+      },
+      "aparelho": {
+        "marca": "LG",
+        "modelo": "K62",
+        "numero_serie": "LG789012345678",
+        "data_compra": "2023-11-15T00:00:00.000Z",
+        "nota_fiscal": "NF-2023-007890",
+        "defeito_relatado": "Não carrega mais"
+      },
+      "observacoes": "Aparelho parou de carregar completamente.",
+      "motivo_processamento": null,
+      "created_at": "2024-01-19T11:30:00.000Z",
+      "updated_at": "2024-01-19T11:30:00.000Z"
+    }
+  ],
+  "metadata": {
+    "total_tickets": 5,
+    "tickets_aceitos": 2,
+    "tickets_rejeitados": 2,
+    "tickets_pendentes": 1,
+    "ultima_atualizacao": "2024-01-19T11:30:00.000Z"
+  }
+}
+

@@ -1,0 +1,9 @@
+{
+  "httpMethod": "POST",
+  "path": "/tickets",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": "{\"nome_completo\":\"João Silva Santos\",\"cpf\":\"123.456.789-00\",\"email\":\"joao.silva@email.com\",\"telefone\":\"(11) 98765-4321\",\"endereco\":{\"rua\":\"Rua das Flores\",\"numero\":\"123\",\"complemento\":\"Apto 45\",\"bairro\":\"Centro\",\"cidade\":\"São Paulo\",\"estado\":\"SP\",\"cep\":\"01234-567\"},\"aparelho\":{\"marca\":\"Samsung\",\"modelo\":\"Galaxy S21\",\"numero_serie\":\"SN123456789012\",\"data_compra\":\"2023-11-20T00:00:00.000Z\",\"nota_fiscal\":\"NF-2023-001234\",\"defeito_relatado\":\"Tela com manchas e não liga mais\"},\"observacoes\":\"Aparelho parou de funcionar após 2 meses de uso normal.\"}"
+}
+
